@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,10 +21,12 @@ public class MainActivity extends AppCompatActivity {
 
     ArrayList prgmName;
     public static int [] prgmImages={R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon};
-    public static String [] prgmNameList={"Let Us C","c++","JAVA","Jsp","Microsoft .Net","Android","PHP","Jquery","JavaScript"};
-    public static int[] amountDummy={1,2,3,4,5,6,7,8,9};
+    public static String [] prgmNameList={"Canned Beans","Dog Toilette","JAVA Course","Magic booster pack","Microsoft .Net","Android","PHP","Jquery","JavaScript"};
+    public static int [] amountDummy={1,2,-3,4,5,6,7,8,9};
+    public static Date[] dates = {new Date(),new Date(),new Date(),new Date(),new Date(),new Date(),new Date(),new Date(),new Date(),};
 
-    public static WalletItem[] wlltList = WalletItem.listBuilder(prgmImages, amountDummy, prgmNameList);
+
+    public static WalletItem[] wlltList = WalletItem.listBuilder(prgmImages, amountDummy, prgmNameList, dates);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -42,6 +42,7 @@ public class CustomAdapter extends BaseAdapter {
 
     public class Holder
     {
+        TextView tvDate;
         TextView tvDescription;
         TextView tvAmount;
         ImageView img;
@@ -49,12 +50,15 @@ public class CustomAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
+
         Holder holder=new Holder();
         View rowView;
         rowView = inflater.inflate(R.layout.wallet_item, null);
         holder.tvDescription=(TextView) rowView.findViewById(R.id.textDescription);
         holder.tvAmount=(TextView) rowView.findViewById(R.id.textAmount);
+        holder.tvDate=(TextView) rowView.findViewById(R.id.textDate);
         holder.img=(ImageView) rowView.findViewById(R.id.imageView1);
+        holder.tvDate.setText(list[position].getDate().toString());
         holder.tvDescription.setText(list[position].getDescription());
         holder.tvAmount.setText(""+list[position].getAmount());
         holder.img.setImageResource(list[position].getImageResource());

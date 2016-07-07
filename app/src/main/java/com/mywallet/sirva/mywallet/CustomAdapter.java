@@ -10,22 +10,22 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class CustomAdapter extends BaseAdapter {
-    String [] result;
+
+    WalletItem [] list;
     Context context;
-    int [] imageId;
     private static LayoutInflater inflater=null;
-    public CustomAdapter(MainActivity mainActivity, String[] prgmNameList, int[] prgmImages) {
+    public CustomAdapter(MainActivity mainActivity, WalletItem[] walletItemList) {
         // TODO Auto-generated constructor stub
-        result=prgmNameList;
+
         context=mainActivity;
-        imageId=prgmImages;
+        list = walletItemList;
         inflater = ( LayoutInflater )context.
                 getSystemService(Context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
     public int getCount() {
         // TODO Auto-generated method stub
-        return result.length;
+        return list.length;
     }
 
     @Override
@@ -42,7 +42,8 @@ public class CustomAdapter extends BaseAdapter {
 
     public class Holder
     {
-        TextView tv;
+        TextView tvDescription;
+        TextView tvAmount;
         ImageView img;
     }
     @Override
@@ -50,16 +51,18 @@ public class CustomAdapter extends BaseAdapter {
         // TODO Auto-generated method stub
         Holder holder=new Holder();
         View rowView;
-        rowView = inflater.inflate(R.layout.program_list, null);
-        holder.tv=(TextView) rowView.findViewById(R.id.textView1);
+        rowView = inflater.inflate(R.layout.wallet_item, null);
+        holder.tvDescription=(TextView) rowView.findViewById(R.id.textDescription);
+        holder.tvAmount=(TextView) rowView.findViewById(R.id.textAmount);
         holder.img=(ImageView) rowView.findViewById(R.id.imageView1);
-        holder.tv.setText(result[position]);
-        holder.img.setImageResource(imageId[position]);
+        holder.tvDescription.setText(list[position].getDescription());
+        holder.tvAmount.setText(""+list[position].getAmount());
+        holder.img.setImageResource(list[position].getImageResource());
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-                Toast.makeText(context, "You Clicked "+result[position], Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "You Clicked "+list[position].getDescription(), Toast.LENGTH_LONG).show();
             }
         });
         return rowView;

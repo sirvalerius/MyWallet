@@ -21,7 +21,9 @@ public class MainActivity extends AppCompatActivity {
     ArrayList prgmName;
     public static int [] prgmImages={R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon,R.drawable.testicon};
     public static String [] prgmNameList={"Let Us C","c++","JAVA","Jsp","Microsoft .Net","Android","PHP","Jquery","JavaScript"};
+    public static int[] amountDummy={1,2,3,4,5,6,7,8,9};
 
+    public static WalletItem[] wlltList = WalletItem.listBuilder(prgmImages, amountDummy, prgmNameList);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         context=this;
 
         lv=(ListView) findViewById(R.id.listView);
-        lv.setAdapter(new CustomAdapter(this, prgmNameList,prgmImages));
+        lv.setAdapter(new CustomAdapter(this, wlltList));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

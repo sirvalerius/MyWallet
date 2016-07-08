@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "799200508849",
+    "firebase_url": "https://mywallet-c1d13.firebaseio.com",
+    "project_id": "mywallet-c1d13",
+    "storage_bucket": "mywallet-c1d13.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:799200508849:android:5bb19091057dc850",
+        "android_client_info": {
+          "package_name": "com.mywallet.sirva.mywallet"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "799200508849-gdfg5kip4c2ge4f1ad6bh2vet8vd1303.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDodLM5zf8vq2nIli64LjXgncWW8bRSppY"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,5 +1,13 @@
 package com.mywallet.sirva.mywallet;
 
+import android.app.AlertDialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -9,11 +17,11 @@ import java.util.Date;
 public class WalletItem {
 
     int imageId;
-    int expenseAmount;
+    double expenseAmount;
     String expenseDescription;
     Date expenseDate;
 
-    public WalletItem(int imageId, int expenseAmount, String expenseDescription, Date expenseDate)
+    public WalletItem(int imageId, double expenseAmount, String expenseDescription, Date expenseDate)
     {
         this.expenseAmount = expenseAmount;
         this.imageId = imageId;
@@ -45,11 +53,108 @@ public class WalletItem {
         return expenseDescription;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return expenseAmount;
     }
 
     public Date getDate() {
         return expenseDate;
+    }
+
+    public static void onClickAddButton(final View view, MainActivity context,final ArrayList<WalletItem> wlltList) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = context.getLayoutInflater();
+        View editAlertView = inflater.inflate(R.layout.edit_walletitem,null);
+        builder.setView(editAlertView);
+        builder.setTitle("New Expense");
+
+        // Set up the input
+        final EditText input = (EditText) editAlertView.findViewById(R.id.editDesctiprion);
+        final EditText number = (EditText) editAlertView.findViewById(R.id.editAmount);
+
+
+        // Set up the buttons
+        builder.setPositiveButton("Gain", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if((input != null)&&(number != null)) {
+                    wlltList.add(new WalletItem(
+                            R.drawable.testicongreen,
+                            Double.parseDouble(number.getText().toString()),
+                            input.getText().toString(),
+                            new Date()
+                    ));
+                }
+            }
+        });
+        builder.setNeutralButton("Expense", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //m_DialogText = input.getText().toString();
+
+                if((input != null)&&(number != null)) {
+                    wlltList.add(new WalletItem(
+                            R.drawable.testiconred,
+                            -1*Double.parseDouble(number.getText().toString()),
+                            input.getText().toString(),
+                            new Date()
+                    ));
+                }
+            }
+        });
+
+        builder.show();
+    }
+
+    public static void onClickEditButton(final View view,final MainActivity context,final ArrayList<WalletItem> wlltList,final int position) {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        LayoutInflater inflater = context.getLayoutInflater();
+        View editAlertView = inflater.inflate(R.layout.edit_walletitem,null);
+        builder.setView(editAlertView);
+        builder.setTitle("Edit Expense");
+
+        // Set up the input
+        final EditText input = (EditText) editAlertView.findViewById(R.id.editDesctiprion);
+        final EditText number = (EditText) editAlertView.findViewById(R.id.editAmount);
+        input.setText(wlltList.get(position).getDescription(),null);
+        number.setText(Double.toString(wlltList.get(position).getAmount()),null);
+
+        // Set up the buttons
+        builder.setPositiveButton("Gain", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if((input != null)&&(number != null)) {
+                    wlltList.add(position,new WalletItem(
+                            R.drawable.testicongreen,
+                            Double.parseDouble(number.getText().toString()),
+                            input.getText().toString(),
+                            new Date()
+                    ));
+                    wlltList.remove(position+1);
+                    context.recreate();
+                }
+            }
+        });
+        builder.setNeutralButton("Expense", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                //m_DialogText = input.getText().toString();
+
+                if((input != null)&&(number != null)) {
+                    wlltList.add(position,new WalletItem(
+                            R.drawable.testiconred,
+                            -1*Double.parseDouble(number.getText().toString()),
+                            input.getText().toString(),
+                            new Date()
+                    ));
+                    wlltList.remove(position+1);
+                    context.recreate();
+                }
+            }
+        });
+
+        builder.show();
     }
 }

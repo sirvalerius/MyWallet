@@ -7,20 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
-public class CustomAdapter extends BaseAdapter {
+public class WalletListAdapter extends BaseAdapter {
 
     ArrayList<WalletItem> list;
     MainActivity context;
     private static LayoutInflater inflater=null;
-    public CustomAdapter(MainActivity mainActivity, ArrayList<WalletItem> walletItemList) {
+    public WalletListAdapter(MainActivity mainActivity, ArrayList<WalletItem> walletItemList) {
         // TODO Auto-generated constructor stub
 
         context = mainActivity;
@@ -55,7 +56,7 @@ public class CustomAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         // TODO Auto-generated method stub
 
         Holder holder=new Holder();
@@ -66,7 +67,8 @@ public class CustomAdapter extends BaseAdapter {
             @Override
             public void onClick(DialogInterface dialog, int which) {
 
-            }
+                WalletItem.onClickEditButton(convertView,context,list,position);
+                            }
 
         };
 
@@ -76,7 +78,7 @@ public class CustomAdapter extends BaseAdapter {
             public void onClick(DialogInterface dialog, int which) {
                 list.remove(position);
                 ListView lv = (ListView) context.findViewById(R.id.listView);
-                lv.deferNotifyDataSetChanged();
+                context.recreate();
             }
 
         };

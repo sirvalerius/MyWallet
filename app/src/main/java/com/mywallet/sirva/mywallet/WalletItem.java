@@ -1,5 +1,6 @@
 package com.mywallet.sirva.mywallet;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -20,17 +21,17 @@ public class WalletItem {
         this.expenseDate = expenseDate;
     }
 
-    public static WalletItem[] listBuilder(int[] imageList, int[]amountList, String[]descriptionList, Date[]dateList) /*throws InvalidAlgorithmParameterException */{
+    public static ArrayList<WalletItem> listBuilder(int[] imageList, int[]amountList, String[]descriptionList, Date[]dateList) /*throws InvalidAlgorithmParameterException */{
 
       /*  if((imageList.length != amountList.length)||(amountList.length != descriptionList.length)||(imageList.length != descriptionList.length)) {
             throw new InvalidAlgorithmParameterException();
         } */
 
-        WalletItem[] list = new WalletItem[imageList.length];
+        ArrayList<WalletItem> list = new ArrayList<WalletItem>(imageList.length);
 
-        for(int i = 0; i < list.length; i++)
+        for(int i = 0; i < imageList.length; i++)
         {
-            list[i] = new WalletItem(imageList[i], amountList[i], descriptionList[i],dateList[i]);
+            list.add(new WalletItem(imageList[i], amountList[i], descriptionList[i],dateList[i]));
         }
 
         return list;

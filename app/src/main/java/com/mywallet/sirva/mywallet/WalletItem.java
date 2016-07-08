@@ -3,6 +3,7 @@ package com.mywallet.sirva.mywallet;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -78,7 +79,11 @@ public class WalletItem {
         builder.setPositiveButton("Gain", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if((input != null)&&(number != null)) {
+                if((input.getText().toString().matches(""))||(number.getText().toString().matches(""))) {
+                    input.setError("Please insert a description");
+                    number.setError("Please insert an amount");
+                }
+                else {
                     wlltList.add(new WalletItem(
                             R.drawable.testicongreen,
                             Double.parseDouble(number.getText().toString()),
@@ -93,7 +98,11 @@ public class WalletItem {
             public void onClick(DialogInterface dialog, int which) {
                 //m_DialogText = input.getText().toString();
 
-                if((input != null)&&(number != null)) {
+                if((input.getText().toString().matches(""))||(number.getText().toString().matches(""))) {
+                    input.setError("Please insert a description");
+                    number.setError("Please insert an amount");
+                }
+                else {
                     wlltList.add(new WalletItem(
                             R.drawable.testiconred,
                             -1*Double.parseDouble(number.getText().toString()),
@@ -125,7 +134,11 @@ public class WalletItem {
         builder.setPositiveButton("Gain", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if((input != null)&&(number != null)) {
+                if((input.getText().toString().matches(""))||(number.getText().toString().matches(""))) {
+                    input.setError("Please insert a description");
+                    number.setError("Please insert an amount");
+                }
+                else {
                     wlltList.add(position,new WalletItem(
                             R.drawable.testicongreen,
                             Double.parseDouble(number.getText().toString()),
@@ -142,7 +155,11 @@ public class WalletItem {
             public void onClick(DialogInterface dialog, int which) {
                 //m_DialogText = input.getText().toString();
 
-                if((input != null)&&(number != null)) {
+                if((input.getText().toString().matches(""))||(number.getText().toString().matches(""))) {
+                    input.setError("Please insert a description");
+                    number.setError("Please insert an amount");
+                }
+                else {
                     wlltList.add(position,new WalletItem(
                             R.drawable.testiconred,
                             -1*Double.parseDouble(number.getText().toString()),

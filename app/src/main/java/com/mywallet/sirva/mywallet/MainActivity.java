@@ -31,13 +31,6 @@ public class MainActivity extends AppCompatActivity {
     private int m_DialogAmount = 0;
     private WalletItem m_DialogResult = null;
 
-    public static int[] prgmImages = {R.drawable.testiconred, R.drawable.testiconred, R.drawable.testiconred, R.drawable.testiconred, R.drawable.testiconred, R.drawable.testiconred, R.drawable.testiconred, R.drawable.testiconred, R.drawable.testiconred};
-    public static String[] prgmNameList = {"Canned Beans", "Dog Toilette", "JAVA Course", "Magic booster pack", "Microsoft .Net", "Android", "PHP", "Jquery", "JavaScript"};
-    public static int[] amountDummy = {1, 2, -3, 4, 5, 6, 7, 8, 9};
-    public static Date[] dates = {new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date(), new Date(),};
-
-    private boolean listViewDrawn = false;
-
     public static ArrayList<WalletItem> wlltList = new ArrayList<WalletItem>() ;// WalletItem.listBuilder(prgmImages, amountDummy, prgmNameList, dates);
 
     private GoogleApiClient client;
@@ -54,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         lv = (ListView) findViewById(R.id.listView);
         if(wlltList != null) {
             lv.setAdapter(new CustomAdapter(this, wlltList));
-            listViewDrawn = true;
         }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);

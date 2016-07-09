@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.mywallet.sirva.mywallet.Activity.MainActivity;
 
 import java.util.ArrayList;
@@ -68,6 +70,11 @@ public class WalletItem {
         View editAlertView = inflater.inflate(R.layout.edit_walletitem,null);
         builder.setView(editAlertView);
         builder.setTitle("New Expense");
+
+        FirebaseDatabase mDb = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = mDb.getReference("mywallet-c1d13");
+
+        myRef.setValue("Hello World");
 
         // Set up the input
         final EditText input = (EditText) editAlertView.findViewById(R.id.editDesctiprion);

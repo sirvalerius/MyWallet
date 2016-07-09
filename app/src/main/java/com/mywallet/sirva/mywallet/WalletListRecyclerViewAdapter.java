@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mywallet.sirva.mywallet.Activity.MainActivity;
 
@@ -20,6 +21,7 @@ public class WalletListRecyclerViewAdapter extends RecyclerView.Adapter<WalletLi
     static ArrayList<WalletItem> walletItemList;
     static MainActivity context;
     private static LayoutInflater inflater=null;
+
     public WalletListRecyclerViewAdapter(MainActivity mainActivity, ArrayList<WalletItem> walletItemList) {
         // TODO Auto-generated constructor stub
 
@@ -33,40 +35,7 @@ public class WalletListRecyclerViewAdapter extends RecyclerView.Adapter<WalletLi
 
         View rowView;
 
-        final DialogInterface.OnClickListener walletItemOnEditClickHandler = new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-
-                WalletItem.onClickEditButton(viewGroup,context,walletItemList,i);
-                notifyItemRemoved(i);
-            }
-
-        };
-
-        final DialogInterface.OnClickListener walletItemOnDeleteClickHandler = new DialogInterface.OnClickListener() {
-
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                walletItemList.remove(i);
-                RecyclerView rv = (RecyclerView) context.findViewById(R.id.recyclerView);
-                notifyItemRemoved(i);
-            }
-
-        };
-
         rowView = inflater.inflate(R.layout.wallet_item, null);
-        rowView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(context);
-                builder.setNeutralButton("Edit",walletItemOnEditClickHandler);
-                builder.setPositiveButton("Delete",walletItemOnDeleteClickHandler);
-
-                builder.show();
-            }
-        });
 
         return new WalletItemHolder(rowView);
     }
@@ -87,19 +56,54 @@ public class WalletListRecyclerViewAdapter extends RecyclerView.Adapter<WalletLi
         public TextView tvAmount;
         public TextView tvDate;
         public ImageView ivIcon;
-        protected View v;
+        final View v;
 
         /**
         *Constructor
          **/
-        public WalletItemHolder(View v) {
+        public WalletItemHolder(final View v) {
             super(v);
             this.v = v;
             tvDescription =  (TextView) v.findViewById(R.id.textDescription);
             tvAmount = (TextView)  v.findViewById(R.id.textAmount);
             tvDate = (TextView)  v.findViewById(R.id.textDate);
             ivIcon = (ImageView) v.findViewById(R.id.imageView1);
+
+            final DialogInterface.OnClickListener walletItemOnEditClickHandler = new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    WalletItem.onClickEditButton(v,context,walletItemList,getAdapterPosition());
+                    v.invalidate();
+                }
+
+            };
+
+            final DialogInterface.OnClickListener walletItemOnDeleteClickHandler = new DialogInterface.OnClickListener() {
+
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Toast.makeText(v.getContext().getApplicationContext(),""+getAdapterPosition(), Toast.LENGTH_SHORT).show();
+                    walletItemList.remove(getAdapterPosition());
+                    v.invalidate();
+                }
+
+            };
+
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    AlertDialog.Builder builder = new AlertDialog.Builder(context);
+                    builder.setNeutralButton("Edit",walletItemOnEditClickHandler);
+                    builder.setPositiveButton("Delete",walletItemOnDeleteClickHandler);
+                    builder.show();
+                }});
+
         }
+
+
     }
 
     @Override

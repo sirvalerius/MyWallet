@@ -16,7 +16,7 @@ public class LaunchActivity extends AppCompatActivity {
 
 
 
-        if(false) {
+        if(true) {
             Intent myIntent = new Intent(LaunchActivity.this, MainActivity.class);
             myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
             LaunchActivity.this.startActivity(myIntent);

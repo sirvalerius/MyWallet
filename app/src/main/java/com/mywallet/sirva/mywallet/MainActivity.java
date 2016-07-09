@@ -5,21 +5,23 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListView lv;
+    private RecyclerView rv;
     private Context context;
     private MainActivity mainActivity = this;
 
@@ -27,7 +29,9 @@ public class MainActivity extends AppCompatActivity {
     private double m_DialogAmount = 0;
     private WalletItem m_DialogResult = null;
 
-    public static ArrayList<WalletItem> wlltList = new ArrayList<WalletItem>() ;// WalletItem.listBuilder(prgmImages, amountDummy, prgmNameList, dates);
+    private boolean drawn = false;
+
+    public static ArrayList<WalletItem> wlltList = new ArrayList<WalletItem>() ;
 
     private GoogleApiClient client;
 
@@ -40,10 +44,11 @@ public class MainActivity extends AppCompatActivity {
 
         context = this;
 
-        lv = (ListView) findViewById(R.id.listView);
+        rv = (RecyclerView) findViewById(R.id.recyclerView);
         if(wlltList != null) {
-            lv.setAdapter(new WalletListAdapter(this, wlltList));
+            rv.setAdapter(new WalletListRecyclerViewAdapter(this, wlltList));
         }
+        rv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {

@@ -1,6 +1,7 @@
-package com.mywallet.sirva.mywallet;
+package com.mywallet.sirva.mywallet.Activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -11,13 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.mywallet.sirva.mywallet.R;
+import com.mywallet.sirva.mywallet.WalletItem;
+import com.mywallet.sirva.mywallet.WalletListRecyclerViewAdapter;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,11 +31,14 @@ public class MainActivity extends AppCompatActivity {
     private Context context;
     private MainActivity mainActivity = this;
 
-    private String m_DialogText = "";
-    private double m_DialogAmount = 0;
-    private WalletItem m_DialogResult = null;
+    private String mDialogText = "";
+    private double mDialogAmount = 0;
+    private WalletItem mDialogResult = null;
 
     private boolean drawn = false;
+
+    private FirebaseAuth.AuthStateListener mAuthListener = null;
+    private FirebaseUser mUser = null;
 
     public static ArrayList<WalletItem> wlltList = new ArrayList<WalletItem>() ;
 
@@ -43,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         context = this;
+
+        mUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        Toast.makeText(getApplicationContext(), mUser.getEmail(), Toast.LENGTH_SHORT).show();
 
         rv = (RecyclerView) findViewById(R.id.recyclerView);
         if(wlltList != null) {
@@ -78,7 +91,10 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
+            FirebaseAuth.getInstance().signOut();
+            Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            MainActivity.this.startActivity(myIntent);
         }
 
         return super.onOptionsItemSelected(item);

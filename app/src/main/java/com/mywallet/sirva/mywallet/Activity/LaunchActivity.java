@@ -1,8 +1,10 @@
-package com.mywallet.sirva.mywallet;
+package com.mywallet.sirva.mywallet.Activity;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.mywallet.sirva.mywallet.R;
 
 public class LaunchActivity extends AppCompatActivity {
 
@@ -14,13 +16,13 @@ public class LaunchActivity extends AppCompatActivity {
 
 
 
-        if(true) {
+        if(false) {
             Intent myIntent = new Intent(LaunchActivity.this, MainActivity.class);
-            myIntent.putExtra("key", 5); //Optional parameters
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
             LaunchActivity.this.startActivity(myIntent);
         }else {
             Intent myIntent = new Intent(LaunchActivity.this, LoginActivity.class);
-            myIntent.putExtra("key", 5); //Optional parameters
+            myIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
             LaunchActivity.this.startActivity(myIntent);
         }
     }

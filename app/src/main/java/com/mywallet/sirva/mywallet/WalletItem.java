@@ -1,13 +1,12 @@
 package com.mywallet.sirva.mywallet;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.TextView;
+
+import com.mywallet.sirva.mywallet.Activity.MainActivity;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -62,7 +61,7 @@ public class WalletItem {
         return expenseDate;
     }
 
-    public static void onClickAddButton(final View view, MainActivity context,final ArrayList<WalletItem> wlltList) {
+    public static void onClickAddButton(final View view, MainActivity context, final ArrayList<WalletItem> wlltList) {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         LayoutInflater inflater = context.getLayoutInflater();
